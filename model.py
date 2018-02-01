@@ -203,10 +203,10 @@ if __name__ == '__main__':
 
     # qnet = build_basic_network(4, 84, 6, None)
     qnet = build_dueling_network(4, 84, 6, None)
-    print qnet
+    print (qnet)
     qnet_target = copy.deepcopy(qnet)
 
     for p in qnet.parameters():
-        print p.mean().data[0], p.std().data[0]
+        print (p.mean().data[0], p.std().data[0])
     fake_input = Variable(torch.FloatTensor(10, 4, 84, 84))
-    print qnet(fake_input).size()
+    print (qnet(fake_input).size())

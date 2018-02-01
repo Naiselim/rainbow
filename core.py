@@ -57,8 +57,8 @@ class ReplayMemory(object):
             state = next_state
             i += 1
             if i % 10000 == 0:
-                print '%d frames burned in' % i
-        print '%d frames burned into the memory.' % i
+                print ('%d frames burned in' % i)
+        print ('%d frames burned into the memory.' % i)
 
     def append(self, state, action, reward, next_state, end):
         assert len(self.samples) <= self.max_size

@@ -120,12 +120,12 @@ class Environment(object):
 if __name__ == '__main__':
 
     env = Environment('roms/breakout.bin', 4, 4, 84, 30, 33, False)
-    print 'starting with game over?', env.ale.game_over()
+    print ('starting with game over?', env.ale.game_over())
 
     state = env.reset()
     i = 0
     while not env.end:
-        print i
+        print (i)
         action = np.random.randint(0, env.num_actions)
         state, reward = env.step(action)
         if i % 100 == 0:
@@ -133,6 +133,6 @@ if __name__ == '__main__':
                 filename = 'test_env/f%d-%d.png' % (i, idx)
                 cv2.imwrite(filename, cv2.resize(f, (800, 800)))
         i += 1
-    print 'total_reward:', env.total_reward
-    print 'clipped_reward', env.clipped_reward
-    print 'total steps:', i
+    print ('total_reward:', env.total_reward)
+    print ('clipped_reward', env.clipped_reward)
+    print ('total steps:', i)

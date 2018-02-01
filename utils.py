@@ -35,7 +35,7 @@ def weights_init(m):
         m.weight.data.normal_(1.0, 0.02)
         m.bias.data.fill_(0)
     else:
-        print '%s is not initialized.' % classtype
+        print ('%s is not initialized.' % classtype)
 
 
 def init_net(net, net_file):
@@ -83,7 +83,7 @@ class Config(object):
         dirname = os.path.dirname(filename)
         if not os.path.exists(dirname):
             os.makedirs(dirname)
-        print 'Results will be stored in:', dirname
+        print ('Results will be stored in:', dirname)
 
         with open(filename, 'w') as f:
             json.dump(vars(self), f, sort_keys=True, indent=2)

@@ -24,4 +24,4 @@ class Logger(object):
     def write(self, msg):
         self.log_file.write(msg + '\n')
         self.log_file.flush()
-        print msg
+        print (msg)
