@@ -46,6 +46,7 @@ def init_net(net, net_file):
 
 
 def count_output_size(input_shape, module):
+    print module
     fake_input = Variable(torch.FloatTensor(*input_shape), volatile=True)
     output_size = module.forward(fake_input).view(-1).size()[0]
     return output_size

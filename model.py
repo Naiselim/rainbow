@@ -12,7 +12,7 @@ class BasicNetwork(nn.Module):
         self.fc = fc
 
     def forward(self, x):
-        assert x.data.max() <= 1.0
+        #assert x.data.max() <= 1.0
         batch = x.size(0)
         y = self.conv(x)
         y = y.view(batch, -1)
@@ -110,11 +110,11 @@ class NoisyLinear(nn.Module):
 
 def _build_default_conv(in_channels):
     conv = nn.Sequential(
-        nn.Conv2d(in_channels, 32, 8, 4),
+        nn.Conv2d(in_channels, 32, 1, 1),
         nn.ReLU(),
-        nn.Conv2d(32, 64, 4, 2),
+        nn.Linear(8, 64),
         nn.ReLU(),
-        nn.Conv2d(64, 64, 3, 1),
+        nn.Linear(64, 64),
         nn.ReLU()
     )
     return conv
@@ -143,7 +143,9 @@ def _build_noisy_fc(dims, sigma0):
 def build_basic_network(in_channels, in_size, out_dim, noisy, sigma0, net_file):
     conv = _build_default_conv(in_channels)
 
-    in_shape = (1, in_channels, in_size, in_size)
+    in_shape = (1, in_channels, in_size[0], in_size[1])
+#    print in_shape
+#    exit(0)
     fc_in = utils.count_output_size(in_shape, conv)
     fc_hid = 512
     dims = [fc_in, fc_hid, out_dim]

@@ -47,7 +47,10 @@ class Environment(object):
 
         self.frame_skip = frame_skip
         self.num_frames = num_frames
-        self.frame_size = np.size(self.map)
+#        print (timestep.observation['board'])
+        self.frame_size = np.shape(timestep.observation['board'])
+#        print (self.frame_size)
+#        exit(0)
         self.no_op_start = no_op_start
         self.dead_as_eoe = dead_as_eoe
 
@@ -137,6 +140,7 @@ class Environment(object):
             reward += r
             clipped_reward += np.sign(r)
     #        dead = (self.ale.lives() < old_lives)
+            self.timestep = timestep
             if done:
                 self.end = True
                 break
@@ -146,6 +150,8 @@ class Environment(object):
         self.clipped_reward += clipped_reward
         return np.array(self.frame_queue), clipped_reward
 
+    def print_map(self):
+        print (self.timestep.observation['board'])
 
 if __name__ == '__main__':
 

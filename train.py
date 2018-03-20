@@ -69,17 +69,22 @@ def train(agent,
         state = next_state
         epsd_iters += 1
         epsd_rewards += reward
+        if i < 10:
+            print (next_state)
+#        else:
+#            break
 
-        if (i+1) % frames_per_update == 0:
+        if (i+1) % 4 == 0:#frames_per_update == 0:
+            print ("update start")
             loss = update_agent(agent, replay_memory, gamma, optim, batch_size)
             logger.append('loss', loss)
             policy.decay()
 
-        if (i+1) % frames_per_sync == 0:
+        if (i+1) % 4 == 0: #frames_per_sync == 0:
             logger.write('>>>syncing nets, i: %d' % (i+1))
             agent.sync_target()
 
-        if (i+1) % frames_per_eval == 0:
+        if (i+1) % 4 == 0: #frames_per_eval == 0:
             logger.write('Train Action distribution:')
             for act, count in enumerate(action_dist):
                 prob = float(count) / action_dist.sum()
